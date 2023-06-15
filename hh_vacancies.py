@@ -22,7 +22,7 @@ def collect_hh_vacancies(languages):
         vacancies[language] = []
         page_number = 1
         page = 0
-        while page < page_number:
+                while page < page_number:
             params = {
                 "professional_role": professional_role_id,
                 "area": city_id,
@@ -37,16 +37,17 @@ def collect_hh_vacancies(languages):
                 )
                 page_response.raise_for_status()
 
-                page_payload = page_response.json()
-                page_number = page_payload["pages"]
-                page += 1
-
-                page_vacancies = page_payload["items"]
-                for vacancy in page_vacancies:
-                    vacancies[language].append(vacancy)
                 time.sleep(0.5)
             except requests.exceptions.HTTPError:
                 time.sleep(1)
+
+            page_payload = page_response.json()
+            page_number = page_payload["pages"]
+            page += 1
+
+            page_vacancies = page_payload["items"]
+            for vacancy in page_vacancies:
+                vacancies[language].append(vacancy)
     return vacancies
 
 
