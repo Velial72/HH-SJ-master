@@ -22,7 +22,7 @@ def collect_hh_vacancies(languages):
         vacancies[language] = []
         page_number = 1
         page = 0
-                while page < page_number:
+        while page < page_number:
             params = {
                 "professional_role": professional_role_id,
                 "area": city_id,
