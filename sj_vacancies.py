@@ -39,21 +39,22 @@ def collect_superjob_vacancies(languages, superjob_key):
                 )
                 page_response.raise_for_status()
 
-                page_payload = page_response.json()
-                if page_payload["total"] > vacancies_number_limit:
-                    page_number = vacancies_number_limit // number_vacancies_on_page
-                elif page_payload["total"] < number_vacancies_on_page:
-                    page_number = 1
-                else:
-                    page_number = page_payload["total"] // number_vacancies_on_page
-                page += 1
-
-                page_vacancies = page_payload["objects"]
-                for vacancy in page_vacancies:
-                    vacancies[language].append(vacancy)
                 time.sleep(0.5)
             except requests.exceptions.HTTPError:
                 time.sleep(1)
+
+            page_payload = page_response.json()
+            if page_payload["total"] > vacancies_number_limit:
+                page_number = vacancies_number_limit // number_vacancies_on_page
+            elif page_payload["total"] < number_vacancies_on_page:
+                page_number = 1
+            else:
+                page_number = page_payload["total"] // number_vacancies_on_page
+            page += 1
+
+            page_vacancies = page_payload["objects"]
+            for vacancy in page_vacancies:
+                vacancies[language].append(vacancy)
     return vacancies
 
 
