@@ -53,8 +53,7 @@ def collect_superjob_vacancies(languages, superjob_key):
             page += 1
 
             page_vacancies = page_payload["objects"]
-            for vacancy in page_vacancies:
-                vacancies[language].append(vacancy)
+            vacancies[language].extend(page_vacancies)
     return vacancies
 
 
