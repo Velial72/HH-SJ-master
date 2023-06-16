@@ -15,10 +15,10 @@ def predict_salary(salary_from, salary_to):
 
 def get_vacancies_statistic(vacancies, predict_rub_salary_func):
     vacancies_statistic = {}
-    for language, find_vacancies in vacancies.items():
+    for language, work_vacancies in vacancies.items():
         salaries = []
-        for count_vacancies, info in enumerate(find_vacancies):
-            salary = predict_rub_salary_func(info)
+        for vacancy_info in work_vacancies:
+            salary = predict_rub_salary_func(vacancy_info)
             if salary:
                 salaries.append(salary)
         if not salaries:
@@ -26,7 +26,7 @@ def get_vacancies_statistic(vacancies, predict_rub_salary_func):
         else:
             average_salary = int(mean(salaries))
         vacancies_statistic[language] = {
-            "vacancies_found": count_vacancies,
+            "vacancies_found": len(work_vacancies),
             "vacancies_processed": len(salaries),
             "average_salary": average_salary,
         }
