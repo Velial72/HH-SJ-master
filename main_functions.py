@@ -17,8 +17,8 @@ def get_vacancies_statistic(vacancies, predict_rub_salary_func):
     vacancies_statistic = {}
     for language, work_vacancies in vacancies.items():
         salaries = []
-        for vacancy_info in work_vacancies:
-            salary = predict_rub_salary_func(vacancy_info)
+        for vacancy_description in work_vacancies:
+            salary = predict_rub_salary_func(vacancy_description)
             if salary:
                 salaries.append(salary)
         if not salaries:
