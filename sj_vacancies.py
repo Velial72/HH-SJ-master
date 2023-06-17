@@ -57,12 +57,6 @@ def collect_superjob_vacancies(languages, superjob_key):
     return vacancies
 
 
-def draw_superjob_statistic(languages, superjob_key):
-    sj_vacancies = collect_superjob_vacancies(languages, superjob_key)
-    sj_statistic = get_vacancies_statistic(sj_vacancies, predict_rub_salary_for_superJob)
-    return draw_table(sj_statistic, "SuperJob Moscow")
-
-
 if __name__ == "__main__":
     load_dotenv()
     superjob_api_key = os.environ["SUPERJOB_API_KEY"]
@@ -79,4 +73,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    print(draw_superjob_statistic(args.languages, superjob_api_key))
+    sj_vacancies = collect_superjob_vacancies(languages, superjob_key)
+    sj_statistic = get_vacancies_statistic(sj_vacancies, predict_rub_salary_for_superJob)
+
+    print(draw_table(sj_statistic, "SuperJob Moscow"))
